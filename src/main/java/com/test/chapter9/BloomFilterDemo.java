@@ -14,7 +14,8 @@ public class BloomFilterDemo {
     public static void main(String[] args) {
         BloomFilter bloomFilter=BloomFilter.create
                 (Funnels.stringFunnel(Charset.defaultCharset()),
-                        1000000,0.001); //1%
+                        //1%
+                        1000000,0.001);
         bloomFilter.put("mic");
         System.out.println(bloomFilter.mightContain("mic"));
     }

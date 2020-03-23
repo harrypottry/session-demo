@@ -25,7 +25,7 @@ public class DistributedLock {
         int lockExpire=(int)(lockTimeout/1000);
         Jedis jedis=null;
         try {
-            jedis = com.test.pub2018.chapter9.JedisConnectionUtils.getJedis();
+            jedis = com.test.chapter9.JedisConnectionUtils.getJedis();
             long end = System.currentTimeMillis() + acquireTimeout;
             //获取锁的限定时间
             while (System.currentTimeMillis() < end) {
@@ -53,7 +53,7 @@ public class DistributedLock {
     public boolean releaseLockWithLua(String lockName,String identifier){
         System.out.println(lockName+"开始释放锁："+identifier);
 
-        Jedis jedis= com.test.pub2018.chapter9.JedisConnectionUtils.getJedis();
+        Jedis jedis= com.test.chapter9.JedisConnectionUtils.getJedis();
         String lockKey="lock:"+lockName;
 
         String lua="if redis.call(\"get\",KEYS[1])==ARGV[1] then " +
@@ -75,7 +75,7 @@ public class DistributedLock {
         Jedis jedis=null;
         boolean isRelease=false;
         try{
-            jedis= com.test.pub2018.chapter9.JedisConnectionUtils.getJedis();
+            jedis= com.test.chapter9.JedisConnectionUtils.getJedis();
             while(true){
                 jedis.watch(lockKey);
                 //判断是否为同一把锁
